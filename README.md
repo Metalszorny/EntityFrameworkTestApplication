@@ -22,7 +22,7 @@ Features:
 Enviroment:
 -----------
 - IDE: Microsoft Visual Studio 2013 Ultimate Update 2
-- Database: Microsoft Sql Server 2012 Developper
+- Database: Microsoft Sql Server 2012 Developer
 - OS: Microsoft Windows 8.1 Ultimate, 64 bit
 
 
