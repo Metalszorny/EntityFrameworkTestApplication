@@ -9,7 +9,7 @@ A test application for Entity Framework with a Customer and Address database.
 
 Used languages:
 ---------------
-- C#
+- Visual C#
 - SQL
 
 
