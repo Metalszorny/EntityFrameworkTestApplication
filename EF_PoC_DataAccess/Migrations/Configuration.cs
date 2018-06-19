@@ -2,13 +2,35 @@
 
 namespace EF_PoC_DataAccess.Migrations
 {
+	/// <summary>
+    /// Interaction logic for Configuration.
+    /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<CustomerContext>
     {
+		#region Constructors
+		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Configuration"/> class.
+		/// </summary>
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
+		
+		/// <summary>
+		/// Destroys the instance of the <see cref="Configuration"/> class.
+		/// </summary>
+        ~Configuration()
+        { }
+		
+		#endregion Constructors
 
+		#region Methods
+		
+		/// <summary>
+		/// Inserts seed data to the database.
+		/// </summary>
+		/// <param name="context">The database context.</param>
         protected override void Seed(CustomerContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -24,5 +46,7 @@ namespace EF_PoC_DataAccess.Migrations
             //    );
             //
         }
+		
+		#endregion Methods
     }
 }

@@ -12,6 +12,9 @@ namespace EF_PoC_Server
     {
         #region Methods
 
+		/// <summary>
+        /// The main entry point for the application.
+        /// </summary>
         static void Main()
         {
             #region CheckDatabaseExistance
@@ -48,18 +51,15 @@ namespace EF_PoC_Server
 
             // Configure a serviceHost.
             string address = "net.tcp://localhost/EFPoCAppService";
-            Uri baseAddress = new Uri(address);
-            ServiceHost serviceHost = new ServiceHost(typeof(ServerM), baseAddress);
+            ServiceHost serviceHost = new ServiceHost(typeof(ServerM), new Uri(address));
 
             try
             {
                 // Bind a serviceHost.
-                NetTcpBinding tcpb = new NetTcpBinding();
-                ServiceMetadataBehavior behavior = new ServiceMetadataBehavior();
-                serviceHost.Description.Behaviors.Add(behavior);
+                serviceHost.Description.Behaviors.Add(new ServiceMetadataBehavior());
 
                 // Open a serviceHost.
-                serviceHost.AddServiceEndpoint(typeof(EF_PoC_Customer.IServerM), tcpb, address);
+                serviceHost.AddServiceEndpoint(typeof(EF_PoC_Customer.IServerM), new NetTcpBinding(), address);
                 serviceHost.Open();
 
                 // The server started.

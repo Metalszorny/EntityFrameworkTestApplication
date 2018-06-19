@@ -20,12 +20,14 @@ namespace EF_PoC_DataAccess
         /// <summary>
         /// Gets or sets the Customers.
         /// </summary>
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Customer> Customers
+		{ get; set; }
 
         /// <summary>
         /// Gets or sets the Addresses.
         /// </summary>
-        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Address> Addresses
+		{ get; set; }
 
         #endregion Properties
 
@@ -48,6 +50,12 @@ namespace EF_PoC_DataAccess
         {
             _dependency = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="CustomerContext"/> class.
+        /// </summary>
+        ~CustomerContext()
+        { }
 
         #endregion Constructors
 

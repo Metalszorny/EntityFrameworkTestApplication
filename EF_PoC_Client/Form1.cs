@@ -13,17 +13,11 @@ namespace EF_PoC_Client
     {
         #region Fields
 
-        // netTcpBinding.
-        static NetTcpBinding netTcpBinding = new NetTcpBinding();
-
-        // endpointAddress.
-        static EndpointAddress endpointAddress = new EndpointAddress(new Uri("net.tcp://localhost/EFPoCAppService"));
-
         // channelFactory.
-        ChannelFactory<IServerM> channelFactory = new ChannelFactory<IServerM>(netTcpBinding, endpointAddress);
+        private ChannelFactory<IServerM> channelFactory = new ChannelFactory<IServerM>(new NetTcpBinding(), new EndpointAddress(new Uri("net.tcp://localhost/EFPoCAppService")));
 
         // hostServer.
-        IServerM hostServer;
+        private IServerM hostServer;
 
         #endregion Fields
 
@@ -36,6 +30,12 @@ namespace EF_PoC_Client
         {
             InitializeComponent();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Form1"/> class.
+        /// </summary>
+        ~Form1()
+        { }
 
         #endregion Constructors
 
@@ -176,7 +176,9 @@ namespace EF_PoC_Client
 
                     // Make edit.
                     if (hostServer.ModifyBoth(aId, cId,
-                                          new Address(textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text, false, new Customer(textBox2.Text, false))))
+                        new Address(textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, 
+							textBox7.Text, textBox8.Text, textBox9.Text, false, 
+							new Customer(textBox2.Text, false))))
                     {
                         // Refresh
                         RefreshGuiTable();
@@ -227,7 +229,8 @@ namespace EF_PoC_Client
                     hostServer = channelFactory.CreateChannel();
 
                     // Make Add.
-                    if (hostServer.AddBoth(new Address(textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text, false, new Customer(textBox2.Text, false))))
+                    if (hostServer.AddBoth(new Address(textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, 
+						textBox7.Text, textBox8.Text, textBox9.Text, false, new Customer(textBox2.Text, false))))
                     {
                         // Refresh
                         RefreshGuiTable();
@@ -266,7 +269,8 @@ namespace EF_PoC_Client
                     hostServer = channelFactory.CreateChannel();
 
                     // Make Add.
-                    if (hostServer.AddAddress(new Address(textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text, false, null)))
+                    if (hostServer.AddAddress(new Address(textBox4.Text, int.Parse(textBox5.Text), 
+						textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text, false, null)))
                     {
                         // Refresh
                         RefreshGuiTable();
@@ -351,8 +355,7 @@ namespace EF_PoC_Client
                 try
                 {
                     // Get the values of the selected item.
-                    int kijeloltsorindex = dataGridView1.SelectedCells[0].RowIndex;
-                    DataGridViewRow kijeloltsor = dataGridView1.Rows[kijeloltsorindex];
+                    DataGridViewRow kijeloltsor = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex];
                     textBox1.Text = kijeloltsor.Cells["Column1"].Value.ToString();
                     textBox2.Text = kijeloltsor.Cells["Column2"].Value.ToString();
                     textBox3.Text = kijeloltsor.Cells["Column3"].Value.ToString();
@@ -422,7 +425,6 @@ namespace EF_PoC_Client
                             if (!oneAddress.IsDeleted && (oneAddress.Customer != null ? !oneAddress.Customer.IsDeleted : true)) // Logical deleting
                             {
                                 DataGridViewRow row = new DataGridViewRow();
-
                                 DataGridViewCell cell1 = new DataGridViewTextBoxCell();
                                 DataGridViewCell cell2 = new DataGridViewTextBoxCell();
                                 DataGridViewCell cell3 = new DataGridViewTextBoxCell();
@@ -435,6 +437,7 @@ namespace EF_PoC_Client
 
                                 cell1.Value = oneAddress.CustomerId;
                                 row.Cells.Add(cell1);
+								
                                 if (oneAddress.Customer != null)
                                 {
                                     cell2.Value = oneAddress.Customer.CustomerName;
@@ -445,6 +448,7 @@ namespace EF_PoC_Client
                                     cell2.Value = "";
                                     row.Cells.Add(cell2);
                                 }
+								
                                 cell3.Value = oneAddress.Id;
                                 row.Cells.Add(cell3);
                                 cell4.Value = oneAddress.CountryName;
@@ -459,57 +463,6 @@ namespace EF_PoC_Client
                                 row.Cells.Add(cell8);
                                 cell9.Value = oneAddress.HouseNumber;
                                 row.Cells.Add(cell9);
-
-                                #region Comment
-
-                                //if (oneCustomer.Customer != null)
-                                //{
-                                //    foreach (var oneCell in oneCustomer.Customer.CustomerAddresses)
-                                //    {
-                                //        DataGridViewCell cell1 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell2 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell3 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell4 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell5 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell6 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell7 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell8 = new DataGridViewTextBoxCell();
-                                //        DataGridViewCell cell9 = new DataGridViewTextBoxCell();
-
-                                //        cell1.Value = oneCustomer.CustomerId;
-                                //        row.Cells.Add(cell1);
-                                //        cell2.Value = oneCustomer.Customer.CustomerName;
-                                //        row.Cells.Add(cell2);
-                                //        cell3.Value = oneCell.AddressId;
-                                //        row.Cells.Add(cell3);
-                                //        cell4.Value = oneCell.CountryName;
-                                //        row.Cells.Add(cell4);
-                                //        cell5.Value = oneCell.ZipCode;
-                                //        row.Cells.Add(cell5);
-                                //        cell6.Value = oneCell.CityName;
-                                //        row.Cells.Add(cell6);
-                                //        cell7.Value = oneCell.DistrictNumber;
-                                //        row.Cells.Add(cell7);
-                                //        cell8.Value = oneCell.StreetName;
-                                //        row.Cells.Add(cell8);
-                                //        cell9.Value = oneCell.HouseNumber;
-                                //        row.Cells.Add(cell9);
-
-                                //        dataGridView1.Rows.Add(row);
-                                //    }
-                                //}
-                                //else
-                                //{
-                                //    DataGridViewCell cell1 = new DataGridViewTextBoxCell();
-                                //    DataGridViewCell cell2 = new DataGridViewTextBoxCell();
-
-                                //    cell1.Value = oneCustomer.CustomerId;
-                                //    row.Cells.Add(cell1);
-                                //    cell2.Value = oneCustomer.Customer.CustomerName;
-                                //    row.Cells.Add(cell2);
-                                //}
-
-                                #endregion Comment
 
                                 dataGridView1.Rows.Add(row);
                             }

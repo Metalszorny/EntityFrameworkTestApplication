@@ -11,7 +11,6 @@ namespace EF_PoC_Customer
     /// </summary>
     [Serializable]
     [DataContract(Name = "Customer", Namespace = "net.tcp://localhost/EFPoCAppService")]
-    //[Table("Customers")]
     public class Customer : BaseObject
     {
         #region Fields
@@ -48,7 +47,6 @@ namespace EF_PoC_Customer
         /// The rowId.
         /// </value>
         [DataMember]
-        //[Column("RowId", Order = 6, TypeName = "int")]
         public RowType RowId
         {
             get { return rowId; }
@@ -62,8 +60,6 @@ namespace EF_PoC_Customer
         /// The customerName.
         /// </value>
         [DataMember]
-        //[Column("CustomerName", Order = 2, TypeName = "varchar")]
-        //[MaxLength(50)]
         public string CustomerName
         {
             get { return customerName; }
@@ -77,7 +73,6 @@ namespace EF_PoC_Customer
         /// The isDeleted.
         /// </value>
         [DataMember]
-        //[Column("IsDeleted", Order = 3, TypeName = "bit")]
         public bool IsDeleted
         {
             get { return isDeleted; }
@@ -90,8 +85,6 @@ namespace EF_PoC_Customer
         /// <value>
         /// The CustomerAddresses.
         /// </value>
-        //[NotMapped]
-        // Configure One-to-Many relationship.
         public virtual Addresses CustomerAddresses
         {
             get { return customerAddresses; }
@@ -118,6 +111,12 @@ namespace EF_PoC_Customer
             customerName = customername;
             isDeleted = isdeleted;
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Customer"/> class.
+        /// </summary>
+        ~Customer()
+        { }
 
         #endregion Constructors
 
@@ -141,7 +140,8 @@ namespace EF_PoC_Customer
         /// <summary>
         /// Gets or sets the Items.
         /// </summary>
-        public List<Customer> Items { get; set; }
+        public List<Customer> Items
+		{ get; set; }
 
         #endregion Properties
 
@@ -154,6 +154,12 @@ namespace EF_PoC_Customer
         {
             Items = new List<Customer>();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Customers"/> class.
+        /// </summary>
+        ~Customers()
+        { }
 
         #endregion Constructors
 

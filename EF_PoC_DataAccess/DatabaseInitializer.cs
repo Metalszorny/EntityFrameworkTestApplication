@@ -1,5 +1,4 @@
 ﻿
-
 namespace EF_PoC_DataAccess
 {
     /// <summary>
@@ -13,7 +12,7 @@ namespace EF_PoC_DataAccess
         private const string connectionString = @"Server=(LocalDb)\v11.0;Database=CustomerDatabase;integrated security=True;data source=SNQL-WORK\;initial catalog=EF_PoC_DataAccess;user=SNQL-WORK\Admin;password=";
 
         // Connect to customerContext.
-        CustomerContext customerContext = new CustomerContext(connectionString);
+        private CustomerContext customerContext = new CustomerContext(connectionString);
 
         #endregion Fields
 

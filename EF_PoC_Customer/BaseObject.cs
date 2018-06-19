@@ -36,8 +36,6 @@ namespace EF_PoC_Customer
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [DataMember]
         [Key]
-        //[Column(Order = 1, TypeName = "uniqueidentifier")]
-        //[Required]
         public Guid Id
         {
             get { return id; }
@@ -51,7 +49,6 @@ namespace EF_PoC_Customer
         /// The creationDate.
         /// </value>
         [DataMember]
-        //[Column(TypeName = "datetime")]
         public DateTime CreationDate
         {
             get { return creationDate; }
@@ -65,7 +62,6 @@ namespace EF_PoC_Customer
         /// The modificationDate.
         /// </value>
         [DataMember]
-        //[Column(TypeName = "datetime")]
         public DateTime ModificationDate
         {
             get { return modificationDate; }
@@ -83,6 +79,12 @@ namespace EF_PoC_Customer
         {
             id = Guid.NewGuid();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="BaseObject"/> class.
+        /// </summary>
+        ~BaseObject()
+        { }
 
         #endregion Constructors
 

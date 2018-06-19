@@ -1,5 +1,4 @@
-# EntityFrameworkTestApplication
-================================
+# EntityFrameworkTestApplicationInVisualCSharp
 
 
 About:
@@ -15,14 +14,13 @@ Used languages:
 
 Features:
 ---------
-- MVC role arrangement
 - WCF for server-client connection
 - Client: Windows Forms
 - Server: Console
 - Data Annotations
 - Microsoft-SQL connection with Windows authentication
-- Fluent API
-- Entity Framework
+- Fluent API for mapping
+- Entity Framework as ORM
 
 
 Enviroment:

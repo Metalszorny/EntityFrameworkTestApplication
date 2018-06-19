@@ -11,7 +11,6 @@ namespace EF_PoC_Customer
     /// </summary>
     [Serializable]
     [DataContract(Name = "Address", Namespace = "net.tcp://localhost/EFPoCAppService")]
-    //[Table("Addresses")]
     public class Address : BaseObject
     {
         #region Fields
@@ -51,8 +50,6 @@ namespace EF_PoC_Customer
         /// The countryName.
         /// </value>
         [DataMember]
-        //[Column("CountryName", Order = 2, TypeName = "varchar")]
-        //[MaxLength(50)]
         public string CountryName
         {
             get { return countryName; }
@@ -66,7 +63,6 @@ namespace EF_PoC_Customer
         /// The zipCode.
         /// </value>
         [DataMember]
-        //[Column("ZipCode", Order = 3, TypeName = "int")]
         public int ZipCode
         {
             get { return zipCode; }
@@ -80,8 +76,6 @@ namespace EF_PoC_Customer
         /// The cityName.
         /// </value>
         [DataMember]
-        //[Column("CityName", Order = 4, TypeName = "varchar")]
-        //[MaxLength(50)]
         public string CityName
         {
             get { return cityName; }
@@ -95,8 +89,6 @@ namespace EF_PoC_Customer
         /// The districtNumber.
         /// </value>
         [DataMember]
-        //[Column("DistrictNumber", Order = 5, TypeName = "varchar")]
-        //[MaxLength(50)]
         public string DistrictNumber
         {
             get { return districtNumber; }
@@ -110,8 +102,6 @@ namespace EF_PoC_Customer
         /// The streetName.
         /// </value>
         [DataMember]
-        //[Column("StreetName", Order = 6, TypeName = "varchar")]
-        //[MaxLength(50)]
         public string StreetName
         {
             get { return streetName; }
@@ -125,8 +115,6 @@ namespace EF_PoC_Customer
         /// The houseNumber.
         /// </value>
         [DataMember]
-        //[Column("HouseNumber", Order = 7, TypeName = "varchar")]
-        //[MaxLength(50)]
         public string HouseNumber
         {
             get { return houseNumber; }
@@ -153,8 +141,6 @@ namespace EF_PoC_Customer
         /// The customerId.
         /// </value>
         [DataMember]
-        //[Column("CustomerId", Order = 11, TypeName = "uniqueidentifier")]
-        //[Required]
         public Guid CustomerId
         {
             get { return customerId; }
@@ -164,9 +150,9 @@ namespace EF_PoC_Customer
         /// <summary>
         /// Gets or sets the Customer.
         /// </summary>
-        // Configure One-to-Many relationship.
         [DataMember]
-        public virtual Customer Customer { get; set; }
+        public virtual Customer Customer
+		{ get; set; }
 
         #endregion Properties
 
@@ -224,6 +210,12 @@ namespace EF_PoC_Customer
             Customer = customer;
             customerId = customer.Id;
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Address"/> class.
+        /// </summary>
+        ~Address()
+        { }
 
         #endregion Constructors
 
@@ -247,7 +239,8 @@ namespace EF_PoC_Customer
         /// <summary>
         /// Gets or sets the Items.
         /// </summary>
-        public List<Address> Items { get; set; }
+        public List<Address> Items
+		{ get; set; }
 
         #endregion Properties
 
@@ -260,6 +253,12 @@ namespace EF_PoC_Customer
         {
             Items = new List<Address>();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Addresses"/> class.
+        /// </summary>
+        ~Addresses()
+        { }
 
         #endregion Constructors
 
